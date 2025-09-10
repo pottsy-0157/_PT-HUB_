@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workout Detail</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <!-- Session Info -->
+    <div class="session-detail">
+      <h2 id="workout-title">PUSH-CORE</h2>
+      <p>📅 <span id="friday-date"></span> | 🕕 6:00 am – 7:00 am (UK)</p>
+      <p>📍 Elev8 Athletics</p>
+      <p><strong>Coach:</strong> Lewis Potts</p>
+    </div>
+
+    <!-- Workout Details Card (collapsible + copy) -->
+    <div class="workout-detail" id="workoutDetail">
+      <div class="workout-title-row">
+        <h2>Today's Workout</h2>
+        <div class="title-actions">
+          <button
+            class="toggle-btn"
+            id="toggleWorkoutBtn"
+            aria-expanded="false"
+            aria-controls="workoutTextWrapper"
+          >
+            Show workout
+          </button>
+          <button
+            class="copy-btn"
+            id="copyWorkoutBtn"
+            aria-label="Copy workout"
+          >
+            Copy
+          </button>
+        </div>
+      </div>
+      <div id="workoutTextWrapper" class="collapsible">
+        <div id="workoutText">
+          <p><strong>Warm-up</strong></p>
+          <ul>
+            <li>5–7 min mixed cardio + shoulder prep</li>
+            <li>
+              2 rounds: 10 band pull-aparts, 10 scap push-ups, 10 PVC
+              pass-throughs
+            </li>
+          </ul>
+          <p><strong>Strength – Push</strong></p>
+          <ul>
+            <li>Barbell Bench Press 5 x 5 @ 75–80%, 2–3 min rest</li>
+            <li>Incline DB Press 3 x 10, 60–90s rest</li>
+            <li>Seated DB Shoulder Press 3 x 10, 60–90s rest</li>
+          </ul>
+          <p><strong>Accessory</strong></p>
+          <ul>
+            <li>Superset x3: 12 Cable Flyes + 12 Triceps Rope Pushdowns</li>
+          </ul>
+          <p><strong>Core Circuit</strong></p>
+          <ul>
+            <li>
+              3 rounds (60s work / 15s rest): Hollow Hold, Dead Bug, Side Plank
+              L/R
+            </li>
+          </ul>
+          <p><strong>Finisher</strong></p>
+          <ul>
+            <li>EMOM 6: 10 Push-ups + 20s Plank (scale reps as needed)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Class Workout -->
+    <div class="class-card">
+      <h3>PUSH / CORE</h3>
+      <div class="class-info">
+        <span>⏱ 45 mins</span>
+        <span>📊 Advanced</span>
+        <span>💪 Sets & Reps</span>
+      </div>
+      <button class="start-btn">▶ Let's get started!</button>
+    </div>
+  </body>
+</html>

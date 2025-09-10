@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workout Detail</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <div class="session-detail">
+      <h2 id="workout-title">UPPER STRENGTH + HYROX SIMULATION</h2>
+      <p>📅 <span id="friday-date"></span> | 🕕 6:00 am – 7:00 am (UK)</p>
+      <p>📍 Elev8 Athletics</p>
+      <p><strong>Coach:</strong> Lewis Potts</p>
+    </div>
+    <!-- Workout Details Card (collapsible + copy) -->
+    <div class="workout-detail" id="workoutDetail">
+      <div class="workout-title-row">
+        <h2>Today's Workout</h2>
+        <div class="title-actions">
+          <button
+            class="toggle-btn"
+            id="toggleWorkoutBtn"
+            aria-expanded="false"
+            aria-controls="workoutTextWrapper"
+          >
+            Show workout
+          </button>
+          <button
+            class="copy-btn"
+            id="copyWorkoutBtn"
+            aria-label="Copy workout"
+          >
+            Copy
+          </button>
+        </div>
+      </div>
+      <div id="workoutTextWrapper" class="collapsible">
+        <div id="workoutText">
+          <p><strong>Warm-up</strong></p>
+          <ul>
+            <li>5–7 min mixed cardio + shoulder prep</li>
+            <li>
+              2 rounds: band pull-aparts, scap push-ups, PVC pass-throughs
+            </li>
+          </ul>
+          <p><strong>Strength – Upper Body</strong></p>
+          <ul>
+            <li>Bench Press 5×5 @ 75–80%</li>
+            <li>Incline DB Press 3×10</li>
+            <li>OHP 3×10</li>
+            <li>Pull-Ups 3×Max</li>
+            <li>Rows 3×12</li>
+            <li>Face Pulls 3×15</li>
+          </ul>
+          <p><strong>HYROX Simulation</strong></p>
+          <ul>
+            <li>Stations performed at 70–100% race load depending on block</li>
+          </ul>
+          <p><strong>Notes</strong></p>
+          <ul>
+            <li>
+              Focus on form, pacing, and smooth transitions between stations.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="class-card">
+      <h3>UPPER BODY + HYROX SIMULATION</h3>
+      <div class="class-info">
+        <span>⏱ 60–75 mins</span>
+        <span>📊 Advanced</span>
+        <span>💪 Strength & Simulation</span>
+      </div>
+      <button class="start-btn">▶ Let's get started!</button>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workout Detail</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <!-- Session Info -->
+    <div class="session-detail">
+      <h2 id="workout-title">LOWER STRENGTH + EASY RUN</h2>
+      <p>📅 <span id="friday-date"></span> | 🕕 6:00 am – 7:00 am (UK)</p>
+      <p>📍 Elev8 Athletics</p>
+      <p><strong>Coach:</strong> Lewis Potts</p>
+    </div>
+
+    <!-- Workout Details Card (collapsible + copy) -->
+    <div class="workout-detail" id="workoutDetail">
+      <div class="workout-title-row">
+        <h2>Today's Workout</h2>
+        <div class="title-actions">
+          <button
+            class="toggle-btn"
+            id="toggleWorkoutBtn"
+            aria-expanded="false"
+            aria-controls="workoutTextWrapper"
+          >
+            Show workout
+          </button>
+          <button
+            class="copy-btn"
+            id="copyWorkoutBtn"
+            aria-label="Copy workout"
+          >
+            Copy
+          </button>
+        </div>
+      </div>
+      <div id="workoutTextWrapper" class="collapsible">
+        <div id="workoutText">
+          <p><strong>Warm-up</strong></p>
+          <ul>
+            <li>5–7 min mixed cardio + shoulder prep</li>
+            <li>
+              2 rounds: 10 band pull-aparts, 10 scap push-ups, 10 PVC
+              pass-throughs
+            </li>
+          </ul>
+          <p><strong>Strength – Push</strong></p>
+          <p><strong>Strength – Lower Body</strong></p>
+          <ul>
+            <li>Squats</li>
+            <li>Deadlifts</li>
+            <li>Split Squats</li>
+            <li>Lunges</li>
+            <li>Step-Ups</li>
+            <li>Calves</li>
+          </ul>
+
+          <p><strong>Run</strong></p>
+          <ul>
+            <li>Easy run @ 4:50–5:15/km (Zone 2)</li>
+          </ul>
+
+          <p><strong>Notes</strong></p>
+          <ul>
+            <li>Keep this session smooth — focus on form and recovery.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Class Workout -->
+    <div class="class-card">
+      <h3>LOWER STRENGTH + EASY RUN</h3>
+      <div class="class-info">
+        <span>⏱ 1 hour</span>
+        <span>📊 Advanced</span>
+        <span>💪 Sets & Reps</span>
+      </div>
+      <button class="start-btn">▶ Let's get started!</button>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workout Detail</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <div class="session-detail">
+      <h2 id="workout-title">UPPER STRENGTH + SKI INTERVALS</h2>
+      <p>📅 <span id="friday-date"></span> | 🕕 6:00 am – 7:00 am (UK)</p>
+      <p>📍 Elev8 Athletics</p>
+      <p><strong>Coach:</strong> Lewis Potts</p>
+    </div>
+    <!-- Workout Details Card (collapsible + copy) -->
+    <div class="workout-detail" id="workoutDetail">
+      <div class="workout-title-row">
+        <h2>Today's Workout</h2>
+        <div class="title-actions">
+          <button
+            class="toggle-btn"
+            id="toggleWorkoutBtn"
+            aria-expanded="false"
+            aria-controls="workoutTextWrapper"
+          >
+            Show workout
+          </button>
+          <button
+            class="copy-btn"
+            id="copyWorkoutBtn"
+            aria-label="Copy workout"
+          >
+            Copy
+          </button>
+        </div>
+      </div>
+      <div id="workoutTextWrapper" class="collapsible">
+        <div id="workoutText">
+          <p><strong>Warm-up</strong></p>
+          <ul>
+            <li>5–7 min mixed cardio + shoulder prep</li>
+            <li>
+              2 rounds: 10 band pull-aparts, 10 scap push-ups, 10 PVC
+              pass-throughs
+            </li>
+          </ul>
+          <p><strong>Strength – Upper Body</strong></p>
+          <ul>
+            <li>Bench Press 5×5 @ 75–80%</li>
+            <li>Incline DB Press 3×10</li>
+            <li>OHP 3×10</li>
+            <li>Pull-Ups 3×Max</li>
+            <li>Rows 3×12</li>
+            <li>Face Pulls 3×15</li>
+          </ul>
+          <p><strong>Intervals – Ski</strong></p>
+          <ul>
+            <li>6×500m @ 2:25 pace, 90s rest (Weeks 1–3)</li>
+          </ul>
+          <p><strong>Notes</strong></p>
+          <ul>
+            <li>Maintain good posture and breathing during Ski intervals.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="class-card">
+      <h3>UPPER BODY + SKI INTERVALS</h3>
+      <div class="class-info">
+        <span>⏱ 60 mins</span>
+        <span>📊 Advanced</span>
+        <span>💪 Strength & Cardio</span>
+      </div>
+      <button class="start-btn">▶ Let's get started!</button>
+    </div>
+  </body>
+</html>

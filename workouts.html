@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workout Detail</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav id="navbar">
+      <!-- Left icons -->
+      <div class="nav-icons left">
+        <i class="fa-solid fa-bars" id="hamburger"></i>
+        <!-- ... -->
+      </div>
+
+      <!-- Center logo + links -->
+      <div class="nav-center">
+        <a href="index.html" class="logo">PT HUB</a>
+        <ul class="nav-links" id="mobileNavLinks">
+          <li><a href="blog-articles.html">CLASSES</a></li>
+          <li><a href="behind-brand.html">BEHIND THE BRAND</a></li>
+          <li><a href="workouts.html">WORKOUTS</a></li>
+        </ul>
+      </div>
+      <!-- ... -->
+    </nav>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <!-- Progress Tracker Section -->
+    <section class="progress-tracker">
+      <h2>Progress Tracker</h2>
+      <p>Track your times and weights over weeks.</p>
+
+      <!-- Dataset Selector -->
+      <div class="tracker-controls">
+        <button data-type="run" class="tracker-btn active">Run</button>
+        <button data-type="ski" class="tracker-btn">SkiErg</button>
+        <button data-type="row" class="tracker-btn">Row</button>
+        <button data-type="weights" class="tracker-btn">Weights</button>
+      </div>
+
+      <!-- Chart -->
+      <div class="chart-wrapper">
+        <canvas id="progress-chart"></canvas>
+        <!-- ID updated -->
+      </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Workout Sessions -->
+    <div class="main-content">
+      <h2>workouts</h2>
+
+      <!-- monday date -->
+      <h2><span id="monday-date"></span></h2>
+
+      <div
+        class="session-card"
+        onclick="window.location.href='lower-easy-run.html?name=lower-easy-run'"
+      >
+        <div class="card-header">
+          <h3>LOWER STRENGTH + EASY RUN</h3>
+          <span class="spaces">YOU GOT THIS!</span>
+        </div>
+        <p><strong>6:00 am – 7:00 am (UK)</strong></p>
+      </div>
+      <!-- tuesday date -->
+      <h2><span id="tuesday-date"></span></h2>
+
+      <div
+        class="session-card"
+        onclick="window.location.href='upper-strength-ski.html?name=upper-strength-ski'"
+      >
+        <div class="card-header">
+          <h3>UPPER STRENGTH + SKI INTERVALS</h3>
+          <span class="spaces">YOU GOT THIS!</span>
+        </div>
+        <p><strong>6:00 am – 7:00 am (UK)</strong></p>
+      </div>
+
+      <!-- wednesday date -->
+      <h2><span id="wednesday-date"></span></h2>
+
+      <div
+        class="session-card"
+        onclick="window.location.href='run-club.html?name=run-club'"
+      >
+        <div class="card-header">
+          <h3>ELEV8 RUN CLUB</h3>
+          <span class="spaces">YOU GOT THIS!</span>
+        </div>
+        <p><strong>6:00 pm – 7:00 pm (UK)</strong></p>
+      </div>
+
+      <div
+        class="session-card"
+        onclick="window.location.href='conditioning-row.html?name=conditioning-row'"
+      >
+        <div class="card-header">
+          <h3>CONDITIONING / ROW FOCUS</h3>
+          <span class="spaces">YOU GOT THIS!</span>
+        </div>
+        <p><strong>6:00 am – 7:00 am (UK)</strong></p>
+      </div>
+
+      <!-- thursday date -->
+      <h2><span id="thursday-date"></span></h2>
+
+      <div
+        class="session-card"
+        onclick="window.location.href='lower-tempo.html?name=lower-tempo'"
+      >
+        <div class="card-header">
+          <h3>UPPER STRENGTH + SKI INTERVALS</h3>
+          <span class="spaces">YOU GOT THIS!</span>
+        </div>
+        <p><strong>6:00 am – 7:00 am (UK)</strong></p>
+      </div>
+
+      <!-- friday date -->
+      <h2><span id="friday-date"></span></h2>
+
+      <div
+        class="session-card"
+        onclick="window.location.href='hyrox-sim.html?name=DAY 5 – UPPER STRENGTH + HYROX SIMULATION'"
+      >
+        <div class="card-header">
+          <h3>UPPER STRENGTH + HYROX SIMULATION</h3>
+          <span class="spaces">YOU GOT THIS!</span>
+        </div>
+        <p><strong>6:00 am – 7:00 am (UK)</strong></p>
+      </div>
+
+      <!-- saturday date -->
+      <h2><span id="saturday-date"></span></h2>
+
+      <div
+        class="session-card"
+        onclick="window.location.href='SATURDAY-HYROX.html?name=HYROX SATURDAY'"
+      >
+        <div class="card-header">
+          <h3>HYROX SATURDAY</h3>
+          <span class="spaces">IT'S EASY!</span>
+        </div>
+        <p><strong>7:30 am – 8:30 am (UK)</strong></p>
+      </div>
+
+      <!-- sunday date -->
+      <h2><span id="sunday-date"></span></h2>
+
+      <div class="session-card">
+        <a href="long-run.html?name=LONG RUN + CORE">
+          <div class="card-header">
+            <h3>LONG RUN + CORE</h3>
+            <span class="spaces">KEEP IT UP!</span>
+          </div>
+          <p><strong>6:00 am – 7:00 am (UK)</strong></p>
+        </a>
+      </div>
+
+      <!-- Calendar / Schedule -->
+      <section class="schedule" id="schedule">
+        <h2>Calendar / Schedule</h2>
+        <p class="schedule-sub">
+          Weekly planner of workouts. Reminders for booked sessions.
+        </p>
+        <div class="week-controls">
+          <button id="prevWeek" class="week-btn" aria-label="Previous week">
+            ←
+          </button>
+          <div id="weekLabel" class="week-label"></div>
+          <button id="nextWeek" class="week-btn" aria-label="Next week">
+            →
+          </button>
+        </div>
+        <div id="weekGrid" class="week-grid"></div>
+        <div id="reminderToast" class="reminder-toast" aria-live="polite"></div>
+      </section>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workout Detail</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <div class="session-detail">
+      <h2 id="workout-title">LONG RUN + CORE</h2>
+      <p>📅 <span id="friday-date"></span> | 🕕 6:00 am – 7:00 am (UK)</p>
+      <p>📍 Elev8 Athletics</p>
+      <p><strong>Coach:</strong> Lewis Potts</p>
+    </div>
+    <!-- Workout Details Card (collapsible + copy) -->
+    <div class="workout-detail" id="workoutDetail">
+      <div class="workout-title-row">
+        <h2>Today's Workout</h2>
+        <div class="title-actions">
+          <button
+            class="toggle-btn"
+            id="toggleWorkoutBtn"
+            aria-expanded="false"
+            aria-controls="workoutTextWrapper"
+          >
+            Show workout
+          </button>
+          <button
+            class="copy-btn"
+            id="copyWorkoutBtn"
+            aria-label="Copy workout"
+          >
+            Copy
+          </button>
+        </div>
+      </div>
+      <div id="workoutTextWrapper" class="collapsible">
+        <div id="workoutText">
+          <p><strong>Warm-up</strong></p>
+          <ul>
+            <li>5–7 min mixed cardio + mobility prep</li>
+            <li>Dynamic drills for core activation</li>
+          </ul>
+          <p><strong>Run – Long</strong></p>
+          <ul>
+            <li>75–80 min @ 4:40–5:00/km (Zone 2)</li>
+          </ul>
+          <p><strong>Core Circuit</strong></p>
+          <ul>
+            <li>3 rounds: Hollow Hold, Dead Bug, Side Plank L/R</li>
+          </ul>
+          <p><strong>Notes</strong></p>
+          <ul>
+            <li>Maintain steady pace; focus on posture and core engagement.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="class-card">
+      <h3>LONG RUN + CORE</h3>
+      <div class="class-info">
+        <span>⏱ 75–80 mins</span>
+        <span>📊 Advanced</span>
+        <span>💪 Endurance & Core</span>
+      </div>
+      <button class="start-btn">▶ Let's get started!</button>
+    </div>
+  </body>
+</html>

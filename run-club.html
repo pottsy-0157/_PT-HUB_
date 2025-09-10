@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workout Detail</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <div class="session-detail">
+      <h2 id="workout-title">ELEV8 RUN CLUB</h2>
+      <p>📅 <span id="friday-date"></span> | 🕕 6:00 pm – 7:00 pm (UK)</p>
+      <p>📍 Elev8 Athletics</p>
+      <p><strong>Coach:</strong> Lewis Potts</p>
+    </div>
+    <!-- Workout Details Card (collapsible + copy) -->
+    <div class="workout-detail" id="workoutDetail">
+      <div class="workout-title-row">
+        <h2>Today's Workout</h2>
+        <div class="title-actions">
+          <button
+            class="toggle-btn"
+            id="toggleWorkoutBtn"
+            aria-expanded="false"
+            aria-controls="workoutTextWrapper"
+          >
+            Show workout
+          </button>
+          <button
+            class="copy-btn"
+            id="copyWorkoutBtn"
+            aria-label="Copy workout"
+          >
+            Copy
+          </button>
+        </div>
+      </div>
+      <div id="workoutTextWrapper" class="collapsible">
+        <div id="workoutText">
+          <p><strong>Warm-up</strong></p>
+          <ul>
+            <li>1km/3Lap</li>
+            <li>strides (200m)</li>
+          </ul>
+          <p><strong>Block A</strong></p>
+          <ul>
+            <li>8 x 400m *60s Recovery</li>
+          </ul>
+          <p><strong>REST</strong></p>
+          <ul>
+            <li>Rest: 3'</li>
+          </ul>
+          <p><strong>Block B</strong></p>
+          <ul>
+            <li>8 x 300m *75s Recovery (100m Walk to start)</li>
+          </ul>
+          <p><strong>COOL DOWN</strong></p>
+          <ul>
+            <li>1km/3Lap Cool down</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="class-card">
+      <h3>ELEV8 RUN CLUB</h3>
+      <div class="class-info">
+        <span>⏱ 60 mins</span>
+        <span>📊 Advanced</span>
+        <span>💪 Endurance & Core</span>
+      </div>
+      <button class="start-btn">▶ Let's get started!</button>
+    </div>
+  </body>
+</html>
