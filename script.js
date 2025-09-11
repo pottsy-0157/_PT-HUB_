@@ -680,10 +680,10 @@ document.addEventListener("DOMContentLoaded", () => {
     scrollContainer.scrollLeft = scrollContainer.scrollWidth;
   }
 
+  const btns = document.querySelectorAll(".tracker-btn");
+
   btns.forEach((btn) => {
     btn.addEventListener("click", () => {
-      btns.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
       currentType = btn.dataset.type;
       updateChart();
       summary.textContent = "";
@@ -697,7 +697,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const time = parseFloat(timeInput.value);
@@ -747,7 +746,6 @@ document.addEventListener("DOMContentLoaded", () => {
     updateChart();
   });
 });
-
 
 
 
