@@ -40,26 +40,49 @@
     <br />
     <br />
     <br />
-    <!-- Progress Tracker Section -->
-    <section class="progress-tracker">
-      <h2>Progress Tracker</h2>
-      <p>Track your times and weights over weeks.</p>
 
-      <!-- Dataset Selector -->
+    <div class="progress-tracker" id="tracker">
       <div class="tracker-controls">
-        <button data-type="run" class="tracker-btn active">Run</button>
-        <button data-type="ski" class="tracker-btn">SkiErg</button>
-        <button data-type="row" class="tracker-btn">Row</button>
-        <button data-type="weights" class="tracker-btn">Weights</button>
+        <button class="tracker-btn active" data-type="run">Run</button>
+        <button class="tracker-btn" data-type="ski">SkiErg</button>
+        <button class="tracker-btn" data-type="row">Row</button>
+        <button class="tracker-btn" data-type="weights">Weights</button>
       </div>
 
-      <!-- Chart -->
-      <div class="chart-wrapper">
-        <canvas id="progress-chart"></canvas>
-        <!-- ID updated -->
+      <div class="chart-scroll" id="chartScroll">
+        <div class="chart-wrapper">
+          <canvas id="progressChart"></canvas>
+        </div>
       </div>
-    </section>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+      <form id="logForm" class="log-form">
+        <input
+          type="number"
+          id="workoutValue"
+          class="log-input"
+          placeholder="Enter time or kg"
+          step="0.01"
+        />
+        <input
+          type="number"
+          id="workoutDistance"
+          class="log-input"
+          placeholder="Distance (km) "
+          step="0.01"
+        />
+        <button type="submit" class="log-btn">Log</button>
+      </form>
+
+      <div id="paceSummary" class="pace-summary"></div>
+      <button
+        type="button"
+        id="undoBtn"
+        class="log-btn"
+        style="background: #e6c200"
+      >
+        Undo Last
+      </button>
+    </div>
 
     <!-- Workout Sessions -->
     <div class="main-content">
@@ -193,3 +216,5 @@
     </div>
   </body>
 </html>
+
+
