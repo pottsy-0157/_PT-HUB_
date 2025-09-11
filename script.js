@@ -586,122 +586,168 @@ window.addEventListener("DOMContentLoaded", function () {
 // Workout tracker with Chart.js
 // Requires <canvas id="progressChart"></canvas> and Chart.js included
 // Example HTML structure:
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   const store = {
-    run: { data: [], labels: [], distances: [], unit: 'min' },
-    ski: { data: [], labels: [], distances: [], unit: 'min' },
-    row: { data: [], labels: [], distances: [], unit: 'min' },
-    weights: { data: [], labels: [], distances: [], unit: 'kg' }
+    run: { data: [], labels: [], distances: [], unit: "min" },
+    ski: { data: [], labels: [], distances: [], unit: "min" },
+    row: { data: [], labels: [], distances: [], unit: "min" },
+    weights: { data: [], labels: [], distances: [], unit: "kg" },
   };
 
-  let currentType = 'run';
-  const canvas = document.getElementById('progressChart');
-  const ctx = canvas.getContext('2d');
+  let currentType = "run";
+  const canvas = document.getElementById("progressChart");
+  const ctx = canvas.getContext("2d");
 
   const chart = new Chart(ctx, {
-    type: 'line',
-    data: { labels: [], datasets: [{ label:'Progress', data:[], borderColor:'#ffd700', backgroundColor:'rgba(255,215,0,0.15)', tension:0.25, fill:true, pointRadius:3, pointHoverRadius:6, borderWidth:2 }] },
+    type: "line",
+    data: {
+      labels: [],
+      datasets: [
+        {
+          label: "Progress",
+          data: [],
+          borderColor: "#ffd700",
+          backgroundColor: "rgba(255,215,0,0.15)",
+          tension: 0.25,
+          fill: true,
+          pointRadius: 3,
+          pointHoverRadius: 6,
+          borderWidth: 2,
+        },
+      ],
+    },
     options: {
-      responsive:true,
-      maintainAspectRatio:false,
+      responsive: true,
+      maintainAspectRatio: false,
       plugins: {
-        legend:{display:false},
+        legend: { display: false },
         tooltip: {
           callbacks: {
             label: (ctx) => {
               const idx = ctx.dataIndex;
               const val = ctx.raw;
-              if(currentType==='weights') return `Weight: ${val} kg`;
-              const distance = store[currentType].distances[idx] || (currentType==='run'?5:500);
-              const pace = val / (currentType==='run'?distance:distance/500);
-              const seconds = Math.round(pace*60);
-              const mm = Math.floor(seconds/60);
+              if (currentType === "weights") return `Weight: ${val} kg`;
+              const distance =
+                store[currentType].distances[idx] ||
+                (currentType === "run" ? 5 : 500);
+              const pace =
+                val / (currentType === "run" ? distance : distance / 500);
+              const seconds = Math.round(pace * 60);
+              const mm = Math.floor(seconds / 60);
               const ss = seconds % 60;
-              return `Time: ${val} min — Distance: ${distance}${currentType==='run'?' km':' m'} — Pace: ${mm}:${String(ss).padStart(2,'0')}${currentType==='run'?' min/km':' min/500m'}`;
-            }
-          }
-        }
+              return `Time: ${val} min — Distance: ${distance}${
+                currentType === "run" ? " km" : " m"
+              } — Pace: ${mm}:${String(ss).padStart(2, "0")}${
+                currentType === "run" ? " min/km" : " min/500m"
+              }`;
+            },
+          },
+        },
       },
       scales: {
-        x:{ticks:{color:'#aaa', font:{size:10}}, grid:{color:'#333'}},
-        y:{ticks:{color:'#aaa', font:{size:10}, stepSize:1, callback:v=>v+' '+store[currentType].unit}, grid:{color:'#333'}}
-      }
-    }
+        x: {
+          ticks: { color: "#aaa", font: { size: 10 } },
+          grid: { color: "#333" },
+        },
+        y: {
+          ticks: {
+            color: "#aaa",
+            font: { size: 10 },
+            stepSize: 1,
+            callback: (v) => v + " " + store[currentType].unit,
+          },
+          grid: { color: "#333" },
+        },
+      },
+    },
   });
 
-  const btns = document.querySelectorAll('.tracker-btn');
-  const form = document.getElementById('logForm');
-  const timeInput = document.getElementById('workoutValue');
-  const distanceInput = document.getElementById('workoutDistance');
-  const summary = document.getElementById('paceSummary');
-  const undoBtn = document.getElementById('undoBtn');
-  const resetBtn = document.getElementById('resetBtn');
+  const btns = document.querySelectorAll(".tracker-btn");
+  const form = document.getElementById("logForm");
+  const timeInput = document.getElementById("workoutValue");
+  const distanceInput = document.getElementById("workoutDistance");
+  const summary = document.getElementById("paceSummary");
+  const undoBtn = document.getElementById("undoBtn");
+  const resetBtn = document.getElementById("resetBtn");
 
   function updateChart() {
     chart.data.labels = store[currentType].labels.slice();
     chart.data.datasets[0].data = store[currentType].data.slice();
     chart.update();
-    document.getElementById('chartScroll').scrollLeft = 10000;
+
+    // Scroll to the newest log
+    const scrollContainer = document.getElementById("chartScroll");
+    scrollContainer.scrollLeft = scrollContainer.scrollWidth;
   }
 
-  btns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      btns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+  btns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      btns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
       currentType = btn.dataset.type;
       updateChart();
-      summary.textContent = '';
+      summary.textContent = "";
 
-      if(currentType==='weights') {
-        distanceInput.style.display='none';
+      if (currentType === "weights") {
+        distanceInput.style.display = "none";
       } else {
-        distanceInput.style.display='inline-block';
-        distanceInput.placeholder = currentType==='run' ? 'Distance (km)' : 'Distance (meters)';
+        distanceInput.style.display = "inline-block";
+        distanceInput.placeholder =
+          currentType === "run" ? "Distance (km)" : "Distance (meters)";
       }
     });
   });
 
-  form.addEventListener('submit', e => {
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
     const time = parseFloat(timeInput.value);
     let distance = parseFloat(distanceInput.value);
 
-    if(currentType==='weights'){
-      if(isNaN(time)) return alert('Enter a valid weight');
+    if (currentType === "weights") {
+      if (isNaN(time)) return alert("Enter a valid weight");
       store[currentType].data.push(time);
-      store[currentType].labels.push(`W${store[currentType].labels.length +1}`);
+      store[currentType].labels.push(
+        `W${store[currentType].labels.length + 1}`
+      );
       store[currentType].distances.push(1);
       summary.textContent = `Logged ${time} kg`;
     } else {
-      if(isNaN(time)) return alert('Enter valid time');
-      if(isNaN(distance)) distance = currentType==='run'?5:500;
+      if (isNaN(time)) return alert("Enter valid time");
+      if (isNaN(distance)) distance = currentType === "run" ? 5 : 500;
       store[currentType].data.push(time);
-      store[currentType].labels.push(`W${store[currentType].labels.length +1}`);
+      store[currentType].labels.push(
+        `W${store[currentType].labels.length + 1}`
+      );
       store[currentType].distances.push(distance);
 
-      const pace = time / (currentType==='run'?distance:distance/500);
-      const seconds = Math.round(pace*60);
-      const mm = Math.floor(seconds/60);
-      const ss = seconds%60;
-      summary.textContent = `Logged ${time} min — Distance: ${distance}${currentType==='run'?' km':' m'} — Pace: ${mm}:${String(ss).padStart(2,'0')}${currentType==='run'?' min/km':' min/500m'}`;
+      const pace = time / (currentType === "run" ? distance : distance / 500);
+      const seconds = Math.round(pace * 60);
+      const mm = Math.floor(seconds / 60);
+      const ss = seconds % 60;
+      summary.textContent = `Logged ${time} min — Distance: ${distance}${
+        currentType === "run" ? " km" : " m"
+      } — Pace: ${mm}:${String(ss).padStart(2, "0")}${
+        currentType === "run" ? " min/km" : " min/500m"
+      }`;
     }
 
-    timeInput.value = '';
-    distanceInput.value = '';
+    timeInput.value = "";
+    distanceInput.value = "";
     timeInput.focus();
     updateChart();
   });
 
-  undoBtn.addEventListener('click', () => {
-    if(store[currentType].data.length===0) return alert('No entries to undo.');
+  undoBtn.addEventListener("click", () => {
+    if (store[currentType].data.length === 0)
+      return alert("No entries to undo.");
     store[currentType].data.pop();
     store[currentType].labels.pop();
     store[currentType].distances.pop();
-    summary.textContent='';
+    summary.textContent = "";
     updateChart();
   });
-
-  
 });
+
+
 
 
