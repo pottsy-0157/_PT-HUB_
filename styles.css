@@ -1260,11 +1260,16 @@ h2 {
 }
 
 /* MOBILE ADJUSTMENTS */
+/* Fix mobile zoom when typing */
 @media (max-width: 500px) {
-  .tracker-controls {
-    flex-direction: column;
-    gap: 0.5rem;
+  .log-input {
+    font-size: 16px;
   }
+  .log-btn {
+    font-size: 16px;
+  }
+}
+
 
   .tracker-btn {
     flex: 1 1 100%;
@@ -1276,13 +1281,7 @@ h2 {
     gap: 0.5rem;
   }
 
-  .log-input {
-    width: 100%;
-  }
 
-  .log-btn {
-    width: 100%;
-  }
 
   .chart-wrapper {
     height: 200px; /* slightly taller for small screens */
@@ -1377,5 +1376,6 @@ h2 {
 .blog-page .blog-content a:hover {
   background: #e6c200; /* slightly darker hover */
 }
+
 
 
