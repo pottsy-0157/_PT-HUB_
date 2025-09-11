@@ -1,4 +1,4 @@
-// Dynamic navbar background on scroll
+/// Dynamic navbar background on scroll
 window.addEventListener("scroll", function () {
   const navbar = document.getElementById("navbar");
   if (navbar) {
@@ -595,9 +595,19 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   let currentType = "run";
+
+  // Elements
   const canvas = document.getElementById("progressChart");
   const ctx = canvas.getContext("2d");
+  const btns = document.querySelectorAll(".tracker-btn");
+  const form = document.getElementById("logForm");
+  const timeInput = document.getElementById("workoutValue");
+  const distanceInput = document.getElementById("workoutDistance");
+  const summary = document.getElementById("paceSummary");
+  const undoBtn = document.getElementById("undoBtn");
+  const chartScroll = document.getElementById("chartScroll");
 
+  // Chart
   const chart = new Chart(ctx, {
     type: "line",
     data: {
@@ -645,48 +655,29 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       },
       scales: {
-        x: {
-          ticks: { color: "#aaa", font: { size: 10 } },
-          grid: { color: "#333" },
-        },
-        y: {
-          ticks: {
-            color: "#aaa",
-            font: { size: 10 },
-            stepSize: 1,
-            callback: (v) => v + " " + store[currentType].unit,
-          },
-          grid: { color: "#333" },
-        },
+        x: { ticks: { color: "#aaa" }, grid: { color: "#333" } },
+        y: { ticks: { color: "#aaa", stepSize: 5 }, grid: { color: "#333" } },
       },
     },
   });
 
-  const btns = document.querySelectorAll(".tracker-btn");
-  const form = document.getElementById("logForm");
-  const timeInput = document.getElementById("workoutValue");
-  const distanceInput = document.getElementById("workoutDistance");
-  const summary = document.getElementById("paceSummary");
-  const undoBtn = document.getElementById("undoBtn");
-  const resetBtn = document.getElementById("resetBtn");
-
+  // Update Chart
   function updateChart() {
     chart.data.labels = store[currentType].labels.slice();
     chart.data.datasets[0].data = store[currentType].data.slice();
     chart.update();
-
-    // Scroll to the newest log
-    const scrollContainer = document.getElementById("chartScroll");
-    scrollContainer.scrollLeft = scrollContainer.scrollWidth;
+    if (chartScroll) chartScroll.scrollLeft = chartScroll.scrollWidth;
   }
 
-  const btns = document.querySelectorAll(".tracker-btn");
-
+  // Workout Buttons
   btns.forEach((btn) => {
+    btn.style.background = "#ffd700"; // all yellow
     btn.addEventListener("click", () => {
       currentType = btn.dataset.type;
       updateChart();
       summary.textContent = "";
+      timeInput.value = "";
+      distanceInput.value = "";
 
       if (currentType === "weights") {
         distanceInput.style.display = "none";
@@ -697,6 +688,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  // Log Workout
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const time = parseFloat(timeInput.value);
@@ -736,16 +729,16 @@ document.addEventListener("DOMContentLoaded", () => {
     updateChart();
   });
 
+  // Undo
   undoBtn.addEventListener("click", () => {
     if (store[currentType].data.length === 0)
       return alert("No entries to undo.");
     store[currentType].data.pop();
     store[currentType].labels.pop();
     store[currentType].distances.pop();
-    summary.textContent = "";
+    summary.textContent = "Last entry removed";
     updateChart();
   });
 });
-
 
 
