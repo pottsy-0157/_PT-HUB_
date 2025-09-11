@@ -583,83 +583,165 @@ window.addEventListener("DOMContentLoaded", function () {
   }
 })();
 
-// Scroll animation
+// Workout tracker with Chart.js
+// Requires <canvas id="progressChart"></canvas> and Chart.js included
+// Example HTML structure:
 document.addEventListener("DOMContentLoaded", () => {
-  const animatedElements = document.querySelectorAll("[data-animate]");
+  const store = {
+    run: { data: [], labels: [], distances: [], unit: "min" },
+    ski: { data: [], labels: [], distances: [], unit: "min" },
+    row: { data: [], labels: [], distances: [], unit: "min" },
+    weights: { data: [], labels: [], distances: [], unit: "kg" },
+  };
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("active");
-          observer.unobserve(entry.target);
-        }
-      });
+  let currentType = "run";
+  const canvas = document.getElementById("progressChart");
+  const ctx = canvas.getContext("2d");
+
+  const chart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: [],
+      datasets: [
+        {
+          label: "Progress",
+          data: [],
+          borderColor: "#ffd700",
+          backgroundColor: "rgba(255,215,0,0.15)",
+          tension: 0.25,
+          fill: true,
+          pointRadius: 3,
+          pointHoverRadius: 6,
+          borderWidth: 2,
+        },
+      ],
     },
-    { threshold: 0.2 }
-  );
-
-  animatedElements.forEach((el) => observer.observe(el));
-});
-
-// Chart.js example for progress tracking
-const ctx = document.getElementById("progress-chart").getContext("2d"); // updated ID
-
-const datasets = {
-  run: { label: "Run (5K min)", data: [19, 18.5, 18.2, 18.1, 18.0] },
-  ski: { label: "SkiErg (1k min)", data: [4.0, 3.9, 3.8, 3.7, 3.6] },
-  row: { label: "Row (1k min)", data: [3.7, 3.65, 3.6, 3.55, 3.5] },
-  weights: { label: "Bench (kg)", data: [60, 65, 70, 75, 80] },
-};
-
-const labels = ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"];
-
-let chart = new Chart(ctx, {
-  type: "line",
-  data: {
-    labels: labels,
-    datasets: [
-      {
-        label: datasets.run.label,
-        data: datasets.run.data,
-        borderColor: "#FFD700",
-        backgroundColor: "rgba(255, 215, 0, 0.15)",
-        fill: true,
-        tension: 0.4,
-        borderWidth: 2,
-        pointBackgroundColor: "#FFD700",
-        pointRadius: 3,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => {
+              const idx = ctx.dataIndex;
+              const val = ctx.raw;
+              if (currentType === "weights") return `Weight: ${val} kg`;
+              const distance =
+                store[currentType].distances[idx] ||
+                (currentType === "run" ? 5 : 500);
+              const pace =
+                val / (currentType === "run" ? distance : distance / 500);
+              const seconds = Math.round(pace * 60);
+              const mm = Math.floor(seconds / 60);
+              const ss = seconds % 60;
+              return `Time: ${val} min — Distance: ${distance}${
+                currentType === "run" ? " km" : " m"
+              } — Pace: ${mm}:${String(ss).padStart(2, "0")}${
+                currentType === "run" ? " min/km" : " min/500m"
+              }`;
+            },
+          },
+        },
       },
-    ],
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    animation: { duration: 600 }, // smooth animation
-    plugins: { legend: { display: false } },
-    scales: {
-      x: {
-        grid: { color: "#333" },
-        ticks: { color: "#aaa", font: { size: 10 } },
-      },
-      y: {
-        grid: { color: "#333" },
-        ticks: { color: "#aaa", font: { size: 10 } },
+      scales: {
+        x: {
+          ticks: { color: "#aaa", font: { size: 9 } },
+          grid: { color: "#333" },
+        },
+        y: {
+          ticks: {
+            color: "#aaa",
+            font: { size: 9 },
+            stepSize: 1,
+            callback: (v) => v + " " + store[currentType].unit,
+          },
+          grid: { color: "#333" },
+        },
       },
     },
-  },
-});
+  });
 
-document.querySelectorAll(".tracker-btn").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    document
-      .querySelectorAll(".tracker-btn")
-      .forEach((b) => b.classList.remove("active"));
-    btn.classList.add("active");
+  const btns = document.querySelectorAll(".tracker-btn");
+  const form = document.getElementById("logForm");
+  const timeInput = document.getElementById("workoutValue");
+  const distanceInput = document.getElementById("workoutDistance");
+  const summary = document.getElementById("paceSummary");
+  const undoBtn = document.getElementById("undoBtn");
 
-    const type = btn.getAttribute("data-type");
-    chart.data.datasets[0].label = datasets[type].label;
-    chart.data.datasets[0].data = datasets[type].data;
+  function updateChart() {
+    chart.data.labels = store[currentType].labels.slice(); // copy array
+    chart.data.datasets[0].data = store[currentType].data.slice(); // copy array
     chart.update();
+    document.getElementById("chartScroll").scrollLeft = 10000;
+  }
+
+  btns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      btns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentType = btn.dataset.type;
+      updateChart();
+      summary.textContent = "";
+
+      // Update distance input placeholder or hide it
+      if (currentType === "weights") {
+        distanceInput.style.display = "none";
+      } else {
+        distanceInput.style.display = "inline-block";
+        if (currentType === "run") distanceInput.placeholder = "Distance (km)";
+        else distanceInput.placeholder = "Distance (meters)";
+      }
+    });
+  });
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const time = parseFloat(timeInput.value);
+    let distance = parseFloat(distanceInput.value);
+
+    if (currentType === "weights") {
+      if (isNaN(time)) return alert("Enter a valid weight");
+      store[currentType].data.push(time);
+      store[currentType].labels.push(
+        `W${store[currentType].labels.length + 1}`
+      );
+      store[currentType].distances.push(1);
+      summary.textContent = `Logged ${time} kg`;
+    } else {
+      if (isNaN(time)) return alert("Enter valid time");
+      if (isNaN(distance)) distance = currentType === "run" ? 5 : 500;
+      store[currentType].data.push(time);
+      store[currentType].labels.push(
+        `W${store[currentType].labels.length + 1}`
+      );
+      store[currentType].distances.push(distance);
+      const pace = time / (currentType === "run" ? distance : distance / 500);
+      const seconds = Math.round(pace * 60);
+      const mm = Math.floor(seconds / 60);
+      const ss = seconds % 60;
+      summary.textContent = `Logged ${time} min — Distance: ${distance}${
+        currentType === "run" ? " km" : " m"
+      } — Pace: ${mm}:${String(ss).padStart(2, "0")}${
+        currentType === "run" ? " min/km" : " min/500m"
+      }`;
+    }
+
+    timeInput.value = "";
+    distanceInput.value = "";
+    timeInput.focus();
+    updateChart();
+  });
+
+  // UNDO last entry
+  undoBtn.addEventListener("click", () => {
+    if (store[currentType].data.length === 0)
+      return alert("No entries to undo.");
+    store[currentType].data.pop();
+    store[currentType].labels.pop();
+    store[currentType].distances.pop();
+    summary.textContent = "";
+    updateChart();
   });
 });
+
