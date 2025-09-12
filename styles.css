@@ -1141,19 +1141,18 @@ h2 {
   border: none;
   border-radius: 6px;
   background: #ffd700; /* yellow */
-  color: #111;          /* black text */
+  color: #111; /* black text */
   cursor: pointer;
   text-align: center;
   transition: background 0.2s, color 0.2s;
 }
 
 .tracker-btn:hover {
-  background: #e6c200; /* slightly darker yellow on hover */
+  background: #fff; /* slightly darker yellow on hover */
 }
 
-
 .tracker-btn.active {
-  background: #ffd700;
+  background: ##fff; /* white for active */
   color: #111;
   font-weight: bold;
 }
@@ -1208,11 +1207,10 @@ h2 {
   margin-bottom: 0.5rem;
 }
 
+/* Chart wrapper */
 .chart-wrapper {
-  position: relative;
-  height: 200px;
-  width: 100%;
-  overflow-x: auto; /* allow scroll */
+  min-width: 500px;
+  height: 180px;
 }
 
 /* Log form */
@@ -1263,44 +1261,87 @@ h2 {
     grid-template-columns: 1fr; /* 1 column */
   }
   .log-input {
-    font-size: 16px;
+    font-size: 16px; /* prevent iOS zoom */
   }
+
   .log-btn {
     font-size: 16px;
   }
 }
 
-
-  .tracker-btn {
-    flex: 1 1 100%;
-    font-size: 0.9rem;
-  }
-
-  .log-form {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
- 
-
-  .chart-wrapper {
-    height: 200px; /* slightly taller for small screens */
-  }
-}
-canvas {
-  touch-action: manipulation; /* stop double-tap zoom */
-  
+.tracker-btn {
+  flex: 1 1 100%;
+  font-size: 0.9rem;
 }
 
-
-/* Prevent mobile zoom on input focus */
-input,
-textarea,
-select {
-  font-size: 16px !important;  /* minimum to stop zoom */
+.log-form {
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
+.chart-wrapper {
+  height: 200px; /* slightly taller for small screens */
+}
 
+input.small {
+  font-size: 16px; /* stops zoom */
+  transform: scale(0.9); /* makes it look smaller */
+  transform-origin: left center;
+}
+
+/* Toggle group */
+.view-toggle {
+  display: flex;
+  border: 2px solid #222;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1rem auto 0.3rem;
+  max-width: 400px;
+}
+
+.view-btn {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  background: #111;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.view-btn.active {
+  background: #fff;
+  color: #111;
+  font-weight: bold;
+}
+
+/* Hide button */
+.hide-toggle {
+  text-align: center;
+  margin: 0.3rem auto 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.view-toggle,
+.hide-toggle {
+  margin-bottom: 1rem;
+}
+
+.hide-btn {
+  background: #444;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #fff;
+  color: #111;
+  font-weight: bold;
+}
 /* end of chart styles */
 
 /* blog page styles */
@@ -1388,10 +1429,5 @@ select {
 .blog-page .blog-content a:hover {
   background: #e6c200; /* slightly darker hover */
 }
-
-
-
-
-
 
 
