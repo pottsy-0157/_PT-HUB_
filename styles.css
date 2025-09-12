@@ -1287,6 +1287,10 @@ h2 {
     height: 200px; /* slightly taller for small screens */
   }
 }
+canvas {
+  touch-action: manipulation; /* stop double-tap zoom */
+}
+
 
 /* end of chart styles */
 
@@ -1375,6 +1379,7 @@ h2 {
 .blog-page .blog-content a:hover {
   background: #e6c200; /* slightly darker hover */
 }
+
 
 
 
