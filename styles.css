@@ -1221,14 +1221,15 @@ h2 {
 }
 
 .log-input {
-  flex: 2;
-  padding: 0.4rem;
+  font-size: 16px;   /* stops mobile zoom */
+  padding: 10px;
+  border: 1px solid #ccc;
   border-radius: 6px;
-  border: none;
-  background: #222;
-  color: #fff;
-  font-size: 0.85rem;
+  width: 100%;
+  max-width: 250px;
+  margin: 5px 0;
 }
+
 
 .log-btn {
   flex: 1;
@@ -1429,5 +1430,6 @@ input.small {
 .blog-page .blog-content a:hover {
   background: #e6c200; /* slightly darker hover */
 }
+
 
 
