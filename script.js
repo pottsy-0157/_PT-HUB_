@@ -1,4 +1,4 @@
-/// Dynamic navbar background on scroll
+// Dynamic navbar background on scroll
 window.addEventListener("scroll", function () {
   const navbar = document.getElementById("navbar");
   if (navbar) {
@@ -596,6 +596,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let currentType = "run";
 
+  // LocalStorage helpers
+  function saveData() {
+    localStorage.setItem("trackerStore", JSON.stringify(store));
+  }
+  function loadData() {
+    const saved = localStorage.getItem("trackerStore");
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      for (let type in parsed) {
+        store[type] = parsed[type];
+      }
+    }
+  }
+  loadData();
+
   // Elements
   const canvas = document.getElementById("progressChart");
   const ctx = canvas.getContext("2d");
@@ -620,8 +635,9 @@ document.addEventListener("DOMContentLoaded", () => {
           backgroundColor: "rgba(255,215,0,0.15)",
           tension: 0.25,
           fill: true,
-          pointRadius: 3,
-          pointHoverRadius: 6,
+          pointRadius: 5,
+          pointHoverRadius: 8,
+          hitRadius: 15, // 🔥 easier to click/tap
           borderWidth: 2,
         },
       ],
@@ -666,13 +682,17 @@ document.addEventListener("DOMContentLoaded", () => {
     chart.data.labels = store[currentType].labels.slice();
     chart.data.datasets[0].data = store[currentType].data.slice();
     chart.update();
-    if (chartScroll) chartScroll.scrollLeft = chartScroll.scrollWidth;
+    if (chartScroll) chartScroll.scrollLeft = chartScroll.scrollWidth; // auto-scroll to newest
+    saveData();
   }
+  updateChart(); // initial render with loaded data
 
   // Workout Buttons
   btns.forEach((btn) => {
-    btn.style.background = "#ffd700"; // all yellow
     btn.addEventListener("click", () => {
+      btns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
       currentType = btn.dataset.type;
       updateChart();
       summary.textContent = "";
@@ -740,28 +760,47 @@ document.addEventListener("DOMContentLoaded", () => {
     updateChart();
   });
 });
+// Toggle chart visibility
+document.addEventListener("DOMContentLoaded", () => {
+  const graphBtn = document.getElementById("graphViewBtn");
+  const calBtn = document.getElementById("calendarViewBtn");
+  const graphView = document.getElementById("graphView");
+  const calView = document.getElementById("calendarView");
+  const hideBtn = document.getElementById("hideViewBtn");
 
+  function showGraph() {
+    graphBtn.classList.add("active");
+    calBtn.classList.remove("active");
+    graphView.classList.remove("hidden");
+    calView.classList.add("hidden");
+  }
 
-function addActivity(type, value) {
-  const dataset = datasets[type].data;
-  dataset.push(value);
+  function showCalendar() {
+    calBtn.classList.add("active");
+    graphBtn.classList.remove("active");
+    calView.classList.remove("hidden");
+    graphView.classList.add("hidden");
+  }
 
-  chart.data.datasets[0].data = dataset;
-  chart.update();
+  graphBtn.addEventListener("click", showGraph);
+  calBtn.addEventListener("click", showCalendar);
 
-  // Scroll wrapper to the far right (latest data)
-  const wrapper = document.querySelector(".chart-wrapper");
-  wrapper.scrollTo({
-    left: wrapper.scrollWidth,
-    behavior: "smooth"
+  hideBtn.addEventListener("click", () => {
+    if (!graphView.classList.contains("hidden")) {
+      graphView.classList.add("hidden");
+      hideBtn.textContent = "Show Graph ";
+    } else if (!calView.classList.contains("hidden")) {
+      calView.classList.add("hidden");
+      hideBtn.textContent = "Show Calendar ";
+    } else {
+      // Restore whichever tab is active
+      if (graphBtn.classList.contains("active")) {
+        graphView.classList.remove("hidden");
+        hideBtn.textContent = "Hide View ";
+      } else {
+        calView.classList.remove("hidden");
+        hideBtn.textContent = "Hide View ";
+      }
+    }
   });
-}
-
-chart.options.elements = {
-  point: {
-    radius: 6,        // visible dot size
-    hitRadius: 20,    // big invisible tap area
-    hoverRadius: 8,   // grows slightly when hovered
-  },
-};
-
+});
