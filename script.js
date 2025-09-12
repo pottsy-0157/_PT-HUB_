@@ -742,3 +742,18 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+function addActivity(type, value) {
+  const dataset = datasets[type].data;
+  dataset.push(value);
+
+  chart.data.datasets[0].data = dataset;
+  chart.update();
+
+  // Scroll wrapper to the far right (latest data)
+  const wrapper = document.querySelector(".chart-wrapper");
+  wrapper.scrollTo({
+    left: wrapper.scrollWidth,
+    behavior: "smooth"
+  });
+}
+
