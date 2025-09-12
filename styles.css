@@ -1292,10 +1292,12 @@ canvas {
   
 }
 
+
+/* Prevent mobile zoom on input focus */
 input,
 textarea,
 select {
-  font-size: 16px; /* prevents auto zoom */
+  font-size: 16px !important;  /* minimum to stop zoom */
 }
 
 
@@ -1386,6 +1388,7 @@ select {
 .blog-page .blog-content a:hover {
   background: #e6c200; /* slightly darker hover */
 }
+
 
 
 
