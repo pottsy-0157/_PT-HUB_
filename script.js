@@ -757,3 +757,11 @@ function addActivity(type, value) {
   });
 }
 
+chart.options.elements = {
+  point: {
+    radius: 6,        // visible dot size
+    hitRadius: 20,    // big invisible tap area
+    hoverRadius: 8,   // grows slightly when hovered
+  },
+};
+
