@@ -1289,6 +1289,13 @@ h2 {
 }
 canvas {
   touch-action: manipulation; /* stop double-tap zoom */
+  
+}
+
+input,
+textarea,
+select {
+  font-size: 16px; /* prevents auto zoom */
 }
 
 
@@ -1379,6 +1386,7 @@ canvas {
 .blog-page .blog-content a:hover {
   background: #e6c200; /* slightly darker hover */
 }
+
 
 
 
