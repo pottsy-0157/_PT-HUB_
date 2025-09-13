@@ -804,3 +804,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
+  const text = "Welcome to PT Hub";
+  let i = 0;
+  function typeWriter() {
+    if (i < text.length) {
+      document.getElementById("welcome-text").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeWriter, 100);
+    }
+  }
+  window.onload = typeWriter;
