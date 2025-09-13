@@ -815,4 +815,9 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(typeWriter, 100);
     }
   }
-  window.onload = typeWriter;
+  window.onload =   // Optional: Add a little "bounce" effect on page load
+  window.addEventListener("load", () => {
+    const arms = document.querySelector(".arms");
+    arms.style.animation = "press 2s infinite";
+  });
+  
