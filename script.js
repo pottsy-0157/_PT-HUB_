@@ -805,19 +805,5 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
-  const text = "Welcome to PT Hub";
-  let i = 0;
-  function typeWriter() {
-    if (i < text.length) {
-      document.getElementById("welcome-text").innerHTML += text.charAt(i);
-      i++;
-      setTimeout(typeWriter, 100);
-    }
-  }
-  window.onload =   // Optional: Add a little "bounce" effect on page load
-  window.addEventListener("load", () => {
-    const arms = document.querySelector(".arms");
-    arms.style.animation = "press 2s infinite";
-  });
+});
   
