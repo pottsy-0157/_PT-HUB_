@@ -37,92 +37,104 @@
     <br>
     <br>
     <br>
-<!-- Welcome Section -->
-<section id="welcome">
-  <h1>Welcome to PT Hub</h1>
-  <div class="bench-press">
-    <div class="bar"></div>
-    <div class="arms"></div>
-    <div class="body"></div>
-  </div>
-</section>
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
 
-<!-- Behind the Brand -->
-<section>
-  <h2>BEHIND THE BRAND</h2>
-</section>
+    /* Welcome section centered */
+    #welcome {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
 
-<style>
-  /* Center the welcome section */
-  #welcome {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: #111;
-    color: #fff;
-  }
+    #welcome h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 50px;
+    }
 
-  #welcome h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    margin-bottom: 40px;
-  }
+    /* Bench press figure */
+    .bench-press {
+      position: relative;
+      width: 160px;
+      height: 120px;
+    }
 
-  /* Bench press guy */
-  .bench-press {
-    position: relative;
-    width: 120px;
-    height: 80px;
-  }
+    /* Barbell */
+    .bar {
+      width: 120px;
+      height: 10px;
+      background: #ccc;
+      position: absolute;
+      left: 20px;
+      top: 0;
+      border-radius: 5px;
+      animation: lift 2s infinite;
+    }
 
-  .bar {
-    width: 120px;
-    height: 10px;
-    background: #ccc;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 5px;
-  }
+    /* Weights */
+    .weight {
+      width: 20px;
+      height: 40px;
+      background: #888;
+      position: absolute;
+      top: -15px;
+    }
+    .weight.left { left: -20px; }
+    .weight.right { right: -20px; }
 
-  .arms {
-    width: 100px;
-    height: 10px;
-    background: #ff4444;
-    position: absolute;
-    top: 20px;
-    left: 10px;
-    border-radius: 5px;
-    animation: press 2s infinite;
-    transform-origin: center;
-  }
+    /* Body */
+    .body {
+      width: 40px;
+      height: 60px;
+      background: #44f;
+      position: absolute;
+      bottom: 0;
+      left: 60px;
+      border-radius: 10px;
+    }
 
-  .body {
-    width: 30px;
-    height: 30px;
-    background: #44f;
-    border-radius: 50%;
-    position: absolute;
-    bottom: 0;
-    left: 45px;
-  }
+    /* Head */
+    .head {
+      width: 30px;
+      height: 30px;
+      background: #ff4444;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 60px;
+      left: 65px;
+    }
 
-  @keyframes press {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(30px); }
-  }
-</style>
+    /* Animation: bar goes up & down */
+    @keyframes lift {
+      0%, 100% { top: 0; }
+      50% { top: -40px; }
+    }
+  </style>
+</head>
+<body>
 
-<script>
-  // Optional: Add a little "bounce" effect on page load
-  window.addEventListener("load", () => {
-    const arms = document.querySelector(".arms");
-    arms.style.animation = "press 2s infinite";
-  });
-</script>
+  <!-- Welcome Section -->
+  <section id="welcome">
+    <h1>Welcome to PT Hub</h1>
+
+    <div class="bench-press">
+      <div class="bar">
+        <div class="weight left"></div>
+        <div class="weight right"></div>
+      </div>
+      <div class="head"></div>
+      <div class="body"></div>
+    </div>
+  </section>
 
 
       <!-- Demo content -->
