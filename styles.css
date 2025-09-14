@@ -1,4 +1,5 @@
 /* Auth pages */
+/* Auth pages */
 .auth-page,
 .account-page {
   min-height: 100vh;
@@ -82,9 +83,6 @@
   border-radius: 8px;
   padding: 0.6rem 0.8rem;
 }
-
-
-
 
 .tracker {
   width: 100%;
@@ -1224,15 +1222,14 @@ h2 {
 }
 
 .log-input {
-  font-size: 16px;   /* stops mobile zoom */
-  padding: 10px;
-  border: 1px solid #ccc;
+  flex: 2;
+  padding: 0.4rem;
   border-radius: 6px;
-  width: 100%;
-  max-width: 250px;
-  margin: 5px 0;
+  border: none;
+  background: #222;
+  color: #fff;
+  font-size: 0.85rem;
 }
-
 
 .log-btn {
   flex: 1;
@@ -1265,7 +1262,13 @@ h2 {
     grid-template-columns: 1fr; /* 1 column */
   }
   .log-input {
-    font-size: 16px; /* prevent iOS zoom */
+    font-size: 16px; /* stops mobile zoom */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 250px;
+    margin: 5px 0;
   }
 
   .log-btn {
@@ -1433,6 +1436,8 @@ input.small {
 .blog-page .blog-content a:hover {
   background: #e6c200; /* slightly darker hover */
 }
+
+/* Founder Profile Styles */
 
 
 
