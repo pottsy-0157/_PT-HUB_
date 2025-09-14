@@ -805,5 +805,3 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-});
-  
